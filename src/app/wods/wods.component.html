@@ -1,0 +1,10 @@
+<h2>List of WODs</h2>
+<ul class="wods">
+  <li *ngFor="let wod of wods"
+    [class.selected]="wod === selectedWod"
+    (click)="onSelect(wod)">
+    <span class="badge">{{wod.id}}</span> {{wod.name}}
+  </li>
+</ul>
+
+<app-wods-detail [Wod]="selectedWod"></app-wods-detail>
