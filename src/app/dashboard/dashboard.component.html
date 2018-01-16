@@ -1,0 +1,9 @@
+<h3>Top Wods</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let wod of wods" class="col-1-4"
+      routerLink="/detail/{{wod.id}}">
+    <div class="module wod">
+      <h4>{{wod.name}}</h4>
+    </div>
+  </a>
+</div>

@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Wod } from '../wod';
+import { WodService } from '../wod.service'
 
 @Component({
   selector: 'app-wods-detail',
@@ -7,12 +11,26 @@ import { Wod } from '../wod';
   styleUrls: ['./wods-detail.component.css']
 })
 export class WodsDetailComponent implements OnInit {
+  @Input() wod: Wod;
 
-  @Input() Wod: Wod;
+  constructor(
+    private route: ActivatedRoute,
+    private wodService: WodService,
+    private location: Location
+  ) {}
 
-  constructor() { }
+  ngOnInit(): void {
+    this.getWod();
+  }
 
-  ngOnInit() {
+  getWod(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.wodService.getWod(id)
+      .subscribe(wod => this.wod = wod);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

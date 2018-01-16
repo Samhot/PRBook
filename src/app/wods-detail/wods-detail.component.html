@@ -1,11 +1,10 @@
-<div *ngIf="Wod">
-  
-    <h2>{{ Wod.name | uppercase }} Details</h2>
-    <div><span>id: </span>{{wod.id}}</div>
-    <div>
-      <label>name:
-        <input [(ngModel)]="Wod.name" placeholder="name">
-      </label>
-    </div>
-  
+<div *ngIf="wod">
+  <h2>{{ wod.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{wod.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="wod.name" placeholder="name"/>
+    </label>
   </div>
+  <button (click)="goBack()">go back</button>
+</div>
