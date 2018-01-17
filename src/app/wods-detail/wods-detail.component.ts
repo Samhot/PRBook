@@ -32,5 +32,10 @@ export class WodsDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  
+  save(): void {
+    this.wodService.updateWod(this.wod)
+      .subscribe(() => this.goBack());
+  }
 
 }

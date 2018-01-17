@@ -23,4 +23,18 @@ export class WodsComponent implements OnInit {
         .subscribe(wods => this.wods = wods);
   }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.wodService.addWod({ name } as Wod)
+      .subscribe(wod => {
+        this.wods.push(wod);
+      });
+  }
+
+  delete(wod: Wod): void {
+    this.wods = this.wods.filter(w => w !== wod);
+    this.wodService.deleteWod(wod).subscribe();
+  }
+
 }

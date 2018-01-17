@@ -1,8 +1,22 @@
 <h2>List of WODs</h2>
+
+<div>
+  <label>Wod name:
+    <input #wodName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(wodName.value); wodName.value=''">
+    add
+  </button>
+</div>
+
+
 <ul class="wods">
   <li *ngFor="let wod of wods">
     <a routerLink="/detail/{{wod.id}}">
       <span class="badge">{{wod.id}}</span> {{wod.name}}
     </a>
+      <button class="delete" title="delete wod" (click)="delete(wod)">x</button>
   </li>
 </ul>
+
