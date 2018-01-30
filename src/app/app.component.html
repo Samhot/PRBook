@@ -1,7 +1,13 @@
-<h1>{{title}}</h1>
+<!-- <h1>{{title}}</h1> -->
 <nav>
   <a routerLink="/dashboard">Dashboard</a>
   <a routerLink="/wods">Wods</a>
+  <a routerLink="/todos">TODO</a>
+  <button (click)="logs = !logs">{{logs ? 'Cacher les logs' : 'Afficher les logs'}}</button>
 </nav>
+
 <router-outlet></router-outlet>
+
+<div *ngIf="logs">
 <app-messages></app-messages>
+</div>

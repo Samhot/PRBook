@@ -1,11 +1,21 @@
 <h3>Top Wods</h3>
 <div class="grid grid-pad">
   <a *ngFor="let wod of wods" class="col-1-4"
-      routerLink="/detail/{{wod.id}}">
+      routerLink="/wod/{{wod.id}}">
     <div class="module wods">
       <h4>{{wod.name}}</h4>
     </div>
   </a>
 </div>
-
+<br><br><br><br><br>
+<h3>Top Todos</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let todo of todos" class="col-1-4"
+      routerLink="/todo/{{todo.id}}">
+    <div class="module wods">
+      <h4>{{todo.titre}}</h4>
+    </div>
+  </a>
+</div>
+<br><br><br><br><br>
 <app-wod-search></app-wod-search>

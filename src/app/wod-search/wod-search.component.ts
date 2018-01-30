@@ -23,7 +23,7 @@ export class WodSearchComponent implements OnInit {
   constructor(private wodService: WodService) { }
 
   // Push a search term into the observable stream.
-  search(term: string): void {
+  searchWod(term: string): void {
     this.searchTerms.next(term);
   }
 
@@ -36,7 +36,7 @@ export class WodSearchComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.wodService.searchWods(term)),
+      switchMap((term: string) => this.wodService.searchWod(term)),
     );
   }
 

@@ -1,11 +1,11 @@
 <div id="search-component">
   <h4>Wod Search</h4>
 
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <input #searchBox id="search-box" (keyup)="searchWod(searchBox.value)" />
 
   <ul class="search-result">
     <li *ngFor="let wod of wods$ | async" >
-      <a routerLink="/detail/{{wod.id}}">
+      <a routerLink="/wod/{{wod.id}}">
         {{wod.name}}
       </a>
     </li>

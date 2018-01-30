@@ -1,0 +1,14 @@
+<div *ngIf="todo">
+  <h2>{{ todo.titre }}</h2>
+  <div><span>id: </span>{{todo.id}}</div>
+  <div class="label">
+    <label class="titre">titre:
+      <input [(ngModel)]="todo.titre" placeholder="titre"/>
+    </label><br>
+    <label class="contenu">contenu:
+      <input [(ngModel)]="todo.contenu" placeholder="contenu"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div>
