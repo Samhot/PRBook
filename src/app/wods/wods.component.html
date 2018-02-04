@@ -1,14 +1,18 @@
 <h2>List of WODs</h2>
 
-<div>
-  <label>Wod name:
-    <input #name />
-  </label>
+<div class="example-container">
+<!-- <span> -->
+    <label>Wod name:
+      <mat-form-field>
+        <input matInput placeholder="Nom du WOD">
+      </mat-form-field>
+    </label>
+  <!-- </span> -->
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(name.value); name.value=''">
-    add
-  </button>
 </div>
+    <button (click)="add(name.value); name.value=''">
+      add
+    </button>
 
 <ul class="wods">
   <li *ngFor="let wod of wods">

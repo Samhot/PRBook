@@ -71,3 +71,12 @@ button.delete {
   background-color: gray !important;
   color: white;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
