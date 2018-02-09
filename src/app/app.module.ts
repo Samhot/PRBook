@@ -8,20 +8,37 @@ import { MaterialModule } from './material.modules';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers/fake-backend';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+// test auth
+import { AuthGuard } from './auth/auth.guard';
+import { AuthenticationService } from './_services/auth.service';
+import { UserService} from './_services/user.service';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { WodsComponent } from './wods/wods.component';
 import { WodsDetailComponent } from './wods-detail/wods-detail.component';
+import { WodSearchComponent } from './wod-search/wod-search.component';
 import { WodService } from './wod.service';
 
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { WodSearchComponent } from './wod-search/wod-search.component';
 import { TodosComponent } from './todos/todos.component';
 import { TodoService } from './todo.service';
 import { TodosDetailComponent } from './todos-detail/todos-detail.component';
+
+// import { PublicDealsComponent } from './public-deals/public-deals.component';
+// import { PrivateDealsComponent } from './private-deals/private-deals.component';
+// import { DealService } from './deal.service';
+// import { CallbackComponent } from './callback.component';
 
 
 @NgModule({
@@ -34,6 +51,11 @@ import { TodosDetailComponent } from './todos-detail/todos-detail.component';
     WodSearchComponent,
     TodosComponent,
     TodosDetailComponent,
+    // PublicDealsComponent,
+    // CallbackComponent,
+    // PrivateDealsComponent,
+    HomeComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +69,15 @@ import { TodosDetailComponent } from './todos-detail/todos-detail.component';
     WodService,
     MessageService,
     TodoService,
-    // ApiService
+    // DealService,
+    UserService,
+    AuthenticationService,
+    AuthGuard,
+    // providers used to create fake backend
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
+
   ],
   bootstrap: [AppComponent]
 })
