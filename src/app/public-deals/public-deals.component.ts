@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Deal } from '../_models/deal';
 // We haven't defined these services yet
-import { DealService } from '../deal.service';
+import { DealService } from '../_services/deal.service';
 
 @Component({
   selector: 'app-public-deals',

@@ -25,14 +25,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { WodsComponent } from './wods/wods.component';
 import { WodsDetailComponent } from './wods-detail/wods-detail.component';
 import { WodSearchComponent } from './wod-search/wod-search.component';
-import { WodService } from './wod.service';
+import { WodService } from './_services/wod.service';
 
 import { MessagesComponent } from './messages/messages.component';
-import { MessageService } from './message.service';
+import { MessageService } from './_services/message.service';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TodosComponent } from './todos/todos.component';
-import { TodoService } from './todo.service';
+import { TodoService } from './_services/todo.service';
 import { TodosDetailComponent } from './todos-detail/todos-detail.component';
 
 // import { PublicDealsComponent } from './public-deals/public-deals.component';

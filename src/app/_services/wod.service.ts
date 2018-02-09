@@ -5,9 +5,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
-import { Wod } from './wod';
+import { Wod } from '../_models/wod';
 import { MessageService } from './message.service';
 
 const httpOptions = {

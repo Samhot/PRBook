@@ -8,8 +8,8 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 
-import { Wod } from '../wod';
-import { WodService } from '../wod.service';
+import { Wod } from '../_models/wod';
+import { WodService } from '../_services/wod.service';
 
 @Component({
   selector: 'app-wod-search',

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DealService } from '../deal.service';
+import { DealService } from '../_services/deal.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Deal } from '../_models/deal';
 

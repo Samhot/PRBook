@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Todo } from '../todo';
-import { TodoService } from '../todo.service'
+import { Todo } from '../_models/todo';
+import { TodoService } from '../_services/todo.service'
 
 @Component({
   selector: 'app-todos-detail',
