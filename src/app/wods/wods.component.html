@@ -1,25 +1,52 @@
 <h2>List of WODs</h2>
 
 <div class="example-container">
-<!-- <span> -->
+<span>
     <label>Wod name:
       <mat-form-field>
-        <input matInput placeholder="Nom du WOD">
+        <input matInput #name placeholder="Nom du WOD">
       </mat-form-field>
     </label>
-  <!-- </span> -->
+  </span>
   <!-- (click) passes input value to add() and then clears the input -->
 </div>
     <button (click)="add(name.value); name.value=''">
       add
     </button>
 
-<ul class="wods">
-  <li *ngFor="let wod of wods">
-    <a routerLink="/wod/{{wod.id}}">
-      <span class="badge">{{wod.id}}</span> {{wod.name}}
-    </a>
-      <button class="delete" title="delete wod" (click)="delete(wod)">x</button>
-  </li>
-</ul>
+<button mat-button color="primary" (click)="list=!list">Afficher sous forme de </button>
 
+<div *ngIf="!list">
+  <ul class="wods">
+    <li *ngFor="let wod of wods">
+      <a routerLink="/wod/{{wod.id}}">
+        <span class="badge">{{wod.id}}</span> {{wod.name}}
+      </a>
+        <button class="delete" title="delete wod" (click)="delete(wod)">x</button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="list">
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <div *ngFor="let wod of wods" style="padding-right: 10px;">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="header-image"></div>
+          <mat-card-title style="font-weight: lighter;">{{wod.name | uppercase}}</mat-card-title>
+          <mat-card-subtitle >{{wod.id}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            A faire : ajouter un contenu au wod
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

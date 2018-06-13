@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { WodService } from '../services/wod.service';
 import { Wod } from '../wod';
-import { WodService } from '../wod.service';
+
 
 @Component({
   selector: 'app-wods',
@@ -11,7 +11,7 @@ import { WodService } from '../wod.service';
 export class WodsComponent implements OnInit {
 
   wods: Wod[];
-  
+
   constructor(private wodService: WodService) { }
 
   ngOnInit() {

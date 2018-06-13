@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Wod } from '../wod';
+import { TodoService } from '../services/todo.service';
+import { WodService } from '../services/wod.service';
 import { Todo } from '../todo';
-import { WodService } from '../wod.service';
-import { TodoService } from '../todo.service';
+import { Wod } from '../wod';
 
 
 @Component({
@@ -24,12 +24,12 @@ export class DashboardComponent implements OnInit {
 
   getWods(): void {
     this.wodService.getWods()
-      .subscribe(wods => this.wods = wods.slice(1,5));
+      .subscribe(wods => this.wods = wods.slice(1, 5));
   }
 
   getTodos(): void {
     this.todoService.getTodos()
-      .subscribe(todo => this.todos = todo.slice(0,5));
+      .subscribe(todo => this.todos = todo.slice(0, 5));
   }
 
 }

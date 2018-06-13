@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { WodService } from '../services/wod.service';
 import { Wod } from '../wod';
-import { WodService } from '../wod.service'
+
 
 @Component({
   selector: 'app-wods-detail',
@@ -32,7 +32,7 @@ export class WodsDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-  
+
   save(): void {
     this.wodService.updateWod(this.wod)
       .subscribe(() => this.goBack());

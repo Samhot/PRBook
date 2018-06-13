@@ -65,9 +65,20 @@
   }
   
   button.delete {
-    position: relative;
-    left: 194px;
-    top: -32px;
-    background-color: gray !important;
-    color: white;
+    position: absolute;
+    right: 20px;
+  }
+
+  .example-card {
+    max-width: 400px;
+  }
+  
+  .complete-header-image {
+    background-image: url('https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Ok_check_yes_tick_accept_success_green_correct.png');
+    background-size: cover;
+  }
+
+  .incomplete-header-image {
+    background-image: url('https://png.icons8.com/windows/1600/in-progress.png');
+    background-size: cover;
   }

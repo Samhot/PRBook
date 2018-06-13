@@ -1,14 +1,15 @@
 <div *ngIf="todo">
-  <h2>{{ todo.titre }}</h2>
-  <div><span>id: </span>{{todo.id}}</div>
-  <div class="label">
-    <label class="titre">titre:
-      <input [(ngModel)]="todo.titre" placeholder="titre"/>
-    </label><br>
-    <label class="contenu">contenu:
-      <input [(ngModel)]="todo.contenu" placeholder="contenu"/>
-    </label>
-  </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+  <h2>{{ todo.name }} (id: {{todo.id}})</h2>
+  <!-- <div class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="todo.name" placeholder="Titre">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput [(ngModel)]="todo.content" placeholder="Contenu"></textarea>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="todo.complete">Accompli</mat-checkbox>
+  </div> -->
+
+  <button (click)="goBack()">Annuler</button>
+  <button (click)="save()">Enregistrer</button>
 </div>

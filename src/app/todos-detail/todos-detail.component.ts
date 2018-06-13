@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TodoService } from '../services/todo.service';
 import { Todo } from '../todo';
-import { TodoService } from '../todo.service'
+
 
 @Component({
   selector: 'app-todos-detail',
@@ -33,7 +33,7 @@ export class TodosDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-  
+
   save(): void {
     this.todoService.updateTodo(this.todo)
       .subscribe(() => this.goBack());

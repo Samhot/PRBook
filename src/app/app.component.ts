@@ -1,22 +1,10 @@
-import {Component,OnInit} from '@angular/core';
-// import {TodoDataService} from './todo-data.service';
-// import {Todo} from './todo';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-body',
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [
-    // TodoDataService
-  ]
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  // todos: Todo[] =[];
-
-  constructor() {
-  }
-
-  public ngOnInit() {
-  }
+export class AppComponent {
+  title = 'app';
 }

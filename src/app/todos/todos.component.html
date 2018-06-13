@@ -1,24 +1,43 @@
-<h2>List of Todos</h2>
+<h2>Tous mes objectifs</h2>
 
 <div>
-  <label>Todo titre:
-    <input #titre />
-  </label>
-  <label>Todo contenu:
-    <input #contenu />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(titre.value, contenu.value); ">
-    add
-  </button>
+  <button *ngIf="!show" mat-button color="primary" (click)="show=!show">Ajouter une tâche à faire</button>
+  <div *ngIf="show">
+    <mat-form-field class="example-full-width">
+      <input matInput #name placeholder="Titre" value="Titre">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput #content placeholder="Contenu" value="Contenu">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="addTodo(name.value, content.value); name.value=''; content.value=''">
+      Ajouter
+    </button>
+    <button mat-button (click)="show=!show">Annuler</button>
+  </div>
 </div>
-
-<ul class="wods">
-  <li *ngFor="let todo of todos">
-    <a routerLink="/todo/{{todo.id}}">
-      <span class="badge">{{todo.status}}</span> {{todo.titre}}
-    </a>
-      <button class="delete" title="delete titre" (click)="delete(todo)">x</button>
-  </li>
-</ul>
-
+<div fxLayout="row" fxLayoutAlign="center start">
+  <div *ngFor="let todo of todos" style="padding-right: 10px;">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div *ngIf="todo.complete" mat-card-avatar class="complete-header-image"></div>
+        <div *ngIf="!todo.complete" mat-card-avatar class="incomplete-header-image"></div>
+        <mat-card-title style="font-weight: lighter;">{{todo.name | uppercase}}</mat-card-title>
+        <mat-card-subtitle *ngIf="!todo.complete">En cours</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="todo.complete">Terminé</mat-card-subtitle>
+        <button mat-icon-button (click)="delete(todo)" class="delete">
+            <mat-icon aria-label="Supprimer ce TODO">delete</mat-icon>
+        </button>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          {{todo.content}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

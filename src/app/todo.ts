@@ -1,6 +1,6 @@
 export class Todo {
     id: number;
-    titre: string;
-    contenu: string;
-    status: boolean;
+    name: string;
+    content: string;
+    complete: string;
   }

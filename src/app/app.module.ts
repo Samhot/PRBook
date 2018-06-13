@@ -1,53 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router/src/router_module';
-import { RoutesRecognized } from '@angular/router/src/events';
-import { MaterialModule } from './material.modules';
-
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-
-import { WodsComponent } from './wods/wods.component';
-import { WodsDetailComponent } from './wods-detail/wods-detail.component';
-import { WodService } from './wod.service';
-
-import { MessagesComponent } from './messages/messages.component';
-import { MessageService } from './message.service';
+import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { WodSearchComponent } from './wod-search/wod-search.component';
-import { TodosComponent } from './todos/todos.component';
-import { TodoService } from './todo.service';
+import { MaterialModule } from './material.module';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageService } from './services/message.service';
+import { TodoService } from './services/todo.service';
+import { WodService } from './services/wod.service';
 import { TodosDetailComponent } from './todos-detail/todos-detail.component';
+import { TodosComponent } from './todos/todos.component';
+import { WodSearchComponent } from './wod-search/wod-search.component';
+import { WodsDetailComponent } from './wods-detail/wods-detail.component';
+import { WodsComponent } from './wods/wods.component';
+
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    WodsComponent,
-    WodsDetailComponent,
-    MessagesComponent,
     DashboardComponent,
-    WodSearchComponent,
+    MessagesComponent,
     TodosComponent,
     TodosDetailComponent,
+    WodSearchComponent,
+    WodsComponent,
+    WodsDetailComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     WodService,
     MessageService,
     TodoService,
-    // ApiService
   ],
   bootstrap: [AppComponent]
 })

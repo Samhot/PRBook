@@ -1,15 +1,15 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { WodsComponent }        from './wods/wods.component';
-import { WodsDetailComponent }  from './wods-detail/wods-detail.component'
-
-import { DashboardComponent }   from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TodosDetailComponent } from './todos-detail/todos-detail.component';
+import { TodosComponent } from './todos/todos.component';
 // import { TodoListComponent } from './todo-list/todo-list.component';
 // import { TodoComponent } from './todo/todo.component';
 import { WodSearchComponent } from './wod-search/wod-search.component';
-import { TodosComponent } from './todos/todos.component';
-import { TodosDetailComponent } from './todos-detail/todos-detail.component';
+import { WodsDetailComponent } from './wods-detail/wods-detail.component';
+import { WodsComponent } from './wods/wods.component';
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

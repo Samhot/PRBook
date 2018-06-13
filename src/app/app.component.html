@@ -1,10 +1,10 @@
-<!-- <h1>{{title}}</h1> -->
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/wods">Wods</a>
-  <a routerLink="/todos">TODO</a>
-  <button (click)="logs = !logs">{{logs ? 'Cacher les logs' : 'Afficher les logs'}}</button>
-</nav>
+<div >
+  <span>Titre</span>
+  <span routerLink="/dashboard">Dashboard</span>
+  <span routerLink="/wods">Wods</span>
+  <span routerLink="/todos">TODO</span>
+  <button style ="right: 40px;position: absolute;" (click)="logs = !logs">{{logs ? 'Cacher les logs' : 'Afficher les logs'}}</button>
+</div>
 
 <router-outlet></router-outlet>
 
