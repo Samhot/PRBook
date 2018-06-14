@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Wod } from '../wod';
+import { Wod } from '../_models/wod';
 import { MessageService } from './message.service';
 
 

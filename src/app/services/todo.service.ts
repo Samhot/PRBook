@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Todo } from '../todo';
+import { Todo } from '../_models/todo';
 import { MessageService } from './message.service';
 
 
