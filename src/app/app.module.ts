@@ -20,8 +20,6 @@ import { WodsComponent } from './wods/wods.component';
 
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +29,7 @@ import { WodsComponent } from './wods/wods.component';
     TodosDetailComponent,
     WodSearchComponent,
     WodsComponent,
-    WodsDetailComponent
+    WodsDetailComponent,
   ],
   imports: [
     BrowserModule,

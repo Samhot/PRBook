@@ -2,7 +2,8 @@ import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WodService } from '../services/wod.service';
-import { Wod } from '../wod';
+import { Wod } from '../_models/wod';
+
 
 
 @Component({

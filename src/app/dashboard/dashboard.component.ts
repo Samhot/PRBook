@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { WodService } from '../services/wod.service';
-import { Todo } from '../todo';
-import { Wod } from '../wod';
+import { Todo } from '../_models/todo';
+import { Wod } from '../_models/wod';
+
 
 
 @Component({

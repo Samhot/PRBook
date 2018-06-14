@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Subject } from 'rxjs/internal/Subject';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { WodService } from '../services/wod.service';
-import { Wod } from '../wod';
+import { Wod } from '../_models/wod';
+
 
 @Component({
   selector: 'app-wod-search',

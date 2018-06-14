@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WodService } from '../services/wod.service';
-import { Wod } from '../wod';
+import { Wod } from '../_models/wod';
 
 
 @Component({

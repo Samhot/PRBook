@@ -2,8 +2,7 @@ import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TodoService } from '../services/todo.service';
-import { Todo } from '../todo';
-
+import { Todo } from '../_models/todo';
 
 @Component({
   selector: 'app-todos-detail',
