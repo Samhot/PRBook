@@ -2,17 +2,17 @@
 
 <div>
   <button *ngIf="!show" mat-button color="primary" (click)="show=!show">Ajouter une tâche à faire</button>
-  <div *ngIf="show">
+  <div *ngIf="show" fxLayout="column" fxLayoutAlign="start start">
     <mat-form-field class="example-full-width">
-      <input matInput #name placeholder="Titre" value="Titre">
+      <input matInput #name placeholder="Titre">
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput #content placeholder="Contenu" value="Contenu">
+      <textarea matInput #content placeholder="Contenu"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addTodo(name.value, content.value); name.value=''; content.value=''">
+    <span fxLayout="row" fxLayoutAlign="space-around start"><button mat-raised-button color="primary" (click)="addTodo(name.value, content.value); name.value=''; content.value=''">
       Ajouter
     </button>
-    <button mat-button (click)="show=!show">Annuler</button>
+    <button mat-button (click)="show=!show">Annuler</button></span>
   </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="center start">

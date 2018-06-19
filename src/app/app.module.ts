@@ -17,12 +17,16 @@ import { MessageService } from './services/message.service';
 import { MouvService } from './services/mouv.service';
 import { TodoService } from './services/todo.service';
 import { WodService } from './services/wod.service';
+import { DataService } from './services/data.service';
 import { TodosDetailComponent } from './todos-detail/todos-detail.component';
 import { TodosComponent } from './todos/todos.component';
 import { WodSearchComponent } from './wod-search/wod-search.component';
 import { WodsDetailComponent } from './wods-detail/wods-detail.component';
 import { WodsComponent } from './wods/wods.component';
 import { AdminComponent } from './admin/admin.component';
+import {AddDialogComponent} from './dialogs/add/add.dialog.component';
+import {EditDialogComponent} from './dialogs/edit/edit.dialog.component';
+import {DeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
 
 
 
@@ -40,6 +44,9 @@ import { AdminComponent } from './admin/admin.component';
     MouvementsDetailComponent,
     LoginComponent,
     AdminComponent,
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,11 +58,17 @@ import { AdminComponent } from './admin/admin.component';
     FlexLayoutModule,
     LoginRoutingModule
   ],
+  entryComponents: [
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent
+  ],
   providers: [
     WodService,
     MessageService,
     TodoService,
-    MouvService
+    MouvService,
+    DataService
   ],
   bootstrap: [AppComponent]
 })
