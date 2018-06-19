@@ -1,0 +1,11 @@
+<div *ngIf="mouv">
+    <h2>{{ mouv.name | uppercase }} Details</h2>
+    <div><span>id: </span>{{mouv.id}}</div>
+    <div>
+      <span>Video : <a href="https://www.youtube.com/watch?v={{mouv.videoIds}}">YOUTUBE</a>
+      </span><br>
+      <span><img src="{{mouv.imageUrl}}" alt=""> </span>
+    </div>
+    <button mat-button (click)="goBack()">Retour</button>
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer</button>
+  </div>

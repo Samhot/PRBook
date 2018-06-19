@@ -7,9 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginRoutingModule } from './login-routing.module';
+import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material.module';
 import { MessagesComponent } from './messages/messages.component';
+import { MouvementsDetailComponent } from './mouvements-detail/mouvements-detail.component';
+import { MouvementsComponent } from './mouvements/mouvements.component';
 import { MessageService } from './services/message.service';
+import { MouvService } from './services/mouv.service';
 import { TodoService } from './services/todo.service';
 import { WodService } from './services/wod.service';
 import { TodosDetailComponent } from './todos-detail/todos-detail.component';
@@ -17,6 +22,7 @@ import { TodosComponent } from './todos/todos.component';
 import { WodSearchComponent } from './wod-search/wod-search.component';
 import { WodsDetailComponent } from './wods-detail/wods-detail.component';
 import { WodsComponent } from './wods/wods.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -30,6 +36,10 @@ import { WodsComponent } from './wods/wods.component';
     WodSearchComponent,
     WodsComponent,
     WodsDetailComponent,
+    MouvementsComponent,
+    MouvementsDetailComponent,
+    LoginComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,12 +48,14 @@ import { WodsComponent } from './wods/wods.component';
     HttpModule,
     HttpClientModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LoginRoutingModule
   ],
   providers: [
     WodService,
     MessageService,
     TodoService,
+    MouvService
   ],
   bootstrap: [AppComponent]
 })

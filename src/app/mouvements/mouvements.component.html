@@ -1,0 +1,41 @@
+<h2>List of MOUVs</h2>
+
+<div class="example-container">
+
+<button mat-button color="primary" (click)="list=!list">Afficher sous forme de </button>
+
+<div *ngIf="!list">
+  <ul class="mouvs">
+    <li *ngFor="let mouv of mouvs">
+      <a routerLink="/mouv/{{mouv.id}}">
+        <span class="badge">{{mouv.id}}</span> {{mouv.name}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="list">
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <div *ngFor="let mouv of mouvs" style="padding-right: 10px;">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="header-image"></div>
+          <mat-card-title style="font-weight: lighter;">{{mouv.name | uppercase}}</mat-card-title>
+          <mat-card-subtitle >{{mouv.id}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{mouv.imageUrl}}" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            A faire : ajouter un contenu au mouv
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<app-wod-search></app-wod-search>

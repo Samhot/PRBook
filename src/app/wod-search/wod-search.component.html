@@ -1,13 +1,47 @@
-<div id="search-component">
-  <h4>Wod Search</h4>
+<div *ngIf="router.url === '/wods'">
+  <div id="search-component">
+    <h4>Wod Search</h4>
 
-  <input #searchBox id="search-box" (keyup)="searchWod(searchBox.value)" />
+    <input #searchBox id="search-box" (keyup)="searchTermWods(searchBox.value)" />
 
-  <ul class="search-result">
-    <li *ngFor="let wod of wods$ | async" >
-      <a routerLink="/wod/{{wod.id}}">
-        {{wod.name}}
-      </a>
-    </li>
-  </ul>
+    <ul class="search-result">
+      <li *ngFor="let wod of wods$ | async" >
+        <a routerLink="/wod/{{wod.id}}">
+          {{wod.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="router.url === '/mouvs'">
+  <div id="search-component">
+    <h4>Mouv Search</h4>
+
+    <input #searchBox id="search-box" (keyup)="searchTermMouvs(searchBox.value)" />
+
+    <ul class="search-result">
+      <li *ngFor="let mouv of mouvs$ | async" >
+        <a routerLink="/mouv/{{mouv.id}}">
+          {{mouv.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="router.url === '/todos'">
+  <div id="search-component">
+    <h4>Todo Search</h4>
+
+    <input #searchBox id="search-box" (keyup)="searchTermTodos(searchBox.value)" />
+
+    <ul class="search-result">
+      <li *ngFor="let todo of todos$ | async" >
+        <a routerLink="/todo/{{todo.id}}">
+          {{todo.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

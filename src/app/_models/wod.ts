@@ -1,4 +1,8 @@
 export class Wod {
     id: number;
-    name: string;
+    title: string;
+    description: string;
+    type: number;
+    coachesNotes: string;
+    movementsIds: string;
   }

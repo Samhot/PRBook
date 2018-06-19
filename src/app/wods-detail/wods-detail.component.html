@@ -1,11 +1,18 @@
 <div *ngIf="wod">
   <h2>{{ wod.name | uppercase }} Details</h2>
   <div><span>id: </span>{{wod.id}}</div>
-  <!-- <div>
-    <label>name:
-      <input [(ngModel)]="wod.name" placeholder="name"/>
-    </label>
-  </div> -->
+  <div>
+    <span>description: {{wod.description}}</span><br>
+    <span>Type de WOD : 
+      <span *ngIf="wod.type == 0">For Time</span>
+      <span *ngIf="wod.type == 1">AMRAP</span>
+      <span *ngIf="wod.type == 2">Reps</span>
+      <span *ngIf="wod.type == 3">RM</span>
+      <span *ngIf="wod.type == 4">Autre</span>
+      <span *ngIf="wod.type == 4">Pas de score</span>
+    </span><br>
+    <span>Conseils du coach : {{wod.coachesNotes}}</span>
+  </div>
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>
 </div>

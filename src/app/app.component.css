@@ -83,8 +83,10 @@
     background-size: cover;
   }
 
-  .flex {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  #header-genihm {
+    position: fixed;
+    z-index:2;
+    min-width: 100%;
+    left: 0;
+    top: 0;
   }

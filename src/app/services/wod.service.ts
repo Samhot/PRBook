@@ -14,7 +14,7 @@ const httpOptions = {
 @Injectable()
 export class WodService {
 
-  private wodsUrl = 'http://localhost:5000';  // URL to web api
+  private Url = 'http://localhost:5000';  // URL to web api
 
   constructor(
     private http: HttpClient,
@@ -23,7 +23,7 @@ export class WodService {
 
   /** GET wods from the server */
   public getWods (): Observable<Wod[]> {
-    return this.http.get<Wod[]>(this.wodsUrl + '/wods')
+    return this.http.get<Wod[]>(this.Url + '/wods')
       .pipe(
         tap(wods => this.log('fetched wods')),
         catchError(this.handleError('getWods', []))
@@ -33,17 +33,16 @@ export class WodService {
   /** GET wod by id. Will 404 if id not found */
   public getWod(id: number): Observable<Wod> {
     // const url = `${this.wodsUrl}wod/${id}`;
-    return this.http.get<Wod>(this.wodsUrl + '/wod/' + id)
+    return this.http.get<Wod>(this.Url + '/wod/' + id)
     .pipe(
       tap(_ => this.log(`fetched wod id=${id}`)),
       catchError(this.handleError<Wod>(`getWod id=${id}`))
     );
   }
 
-
   /** GET wod by id. Return `undefined` when id not found */
   getWodNo404<Data>(id: number): Observable<Wod> {
-    const url = `${this.wodsUrl}/?id=${id}`;
+    const url = `${this.Url}/?id=${id}`;
     return this.http.get<Wod[]>(url)
     .pipe(
       map(wods => wods[0]), // returns a {0|1} element array
@@ -61,7 +60,7 @@ export class WodService {
       // if not search term, return empty wod array.
       return of([]);
     }
-    return this.http.get<Wod[]>(this.wodsUrl + `/wod/search/${term}`).pipe(
+    return this.http.get<Wod[]>(this.Url + `/wod/search/${term}`).pipe(
       tap(_ => this.log(`found wods matching "${term}"`)),
       catchError(this.handleError<Wod[]>('searchWods', []))
     );
@@ -69,7 +68,7 @@ export class WodService {
 
   /** POST: add a new wod to the server */
   addWod (wod: Wod): Observable<Wod> {
-    return this.http.post<Wod>(this.wodsUrl + '/wod/', wod, httpOptions)
+    return this.http.post<Wod>(this.Url + '/wod/', wod, httpOptions)
     .pipe(
       // tslint:disable-next-line:no-shadowed-variable
       tap((wod: Wod) => this.log(`added wod w/ id=${wod.id}`)),
@@ -79,7 +78,7 @@ export class WodService {
 
   /** PUT: update the wod on the server */
   updateWod (wod: Wod): Observable<Wod> {
-    return this.http.put(this.wodsUrl + '/wod/' + wod.id, wod, httpOptions)
+    return this.http.put(this.Url + '/wod/' + wod.id, wod, httpOptions)
       .pipe(
         tap(_ => this.log(`updated wod id=${wod.id}`)),
         catchError(this.handleError<any>('updateWod'))
@@ -90,7 +89,7 @@ export class WodService {
   deleteWod (wod: Wod | number): Observable<Wod> {
     const id = typeof wod === 'number' ? wod : wod.id;
     // const url = `${this.wodsUrl}/${id}`;
-    return this.http.delete<Wod>(this.wodsUrl + '/wod/' + id, httpOptions).pipe(
+    return this.http.delete<Wod>(this.Url + '/wod/' + id, httpOptions).pipe(
       tap(_ => this.log(`deleted wod id=${id}`)),
       catchError(this.handleError<Wod>('deleteWod'))
     );

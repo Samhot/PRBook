@@ -1,12 +1,19 @@
-<div >
-  <span>Titre</span>
+<mat-toolbar id="header-genihm" fxLayout="row" fxLayoutAlign="space-between center">
+  <span><h1>PRBook</h1></span>
   <span routerLink="/dashboard">Dashboard</span>
   <span routerLink="/wods">Wods</span>
+  <span routerLink="/mouvs">Mouvements</span>
   <span routerLink="/todos">TODO</span>
-  <button style ="right: 40px;position: absolute;" (click)="logs = !logs">{{logs ? 'Cacher les logs' : 'Afficher les logs'}}</button>
-</div>
+  <span routerLink="/admin">ADMIN</span>
+  <button mat-icon-button routerLink="/login">
+    <mat-icon aria-label="Profil">face</mat-icon>
+  </button>
+  <button mat-button (click)="logs = !logs">{{logs ? 'Cacher les logs' : 'Afficher les logs'}}</button>
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<div style="position: relative; top: 64px; left: 0px; right: 0px; margin-bottom: 10px;">
+  <router-outlet></router-outlet>
+</div>
 
 <div *ngIf="logs">
 <app-messages></app-messages>
