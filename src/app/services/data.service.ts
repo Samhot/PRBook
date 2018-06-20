@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Issue } from '../_models/issue';
-import { Wod } from '../_models/Wod';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { Observable, of } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Mouvement } from '../_models/mouvements';
+import { Todo } from '../_models/todo';
+import { Wod } from '../_models/Wod';
 import { MessageService } from './message.service';
 
 const httpOptions = {
@@ -16,12 +18,16 @@ export class DataService {
   // private API_URL = 'https://api.github.com/repos/angular/angular/issues';
   private API_URL = 'http://localhost:5000';  // URL to web api
 
-  
+
   dataChange: BehaviorSubject<Wod[]> = new BehaviorSubject<Wod[]>([]);
   // Temporarily stores data from dialogs
   dialogData: any;
 
-  constructor (private httpClient: HttpClient, private messageService: MessageService) {}
+  constructor (
+    private httpClient: HttpClient,
+    private messageService: MessageService,
+    private snack: MatSnackBar
+  ) {}
 
   get data(): Wod[] {
     return this.dataChange.value;
@@ -31,23 +37,17 @@ export class DataService {
     return this.dialogData;
   }
 
-  /** CRUD METHODS */
+  /** GET wods from the server */
   getAllWods(): void {
-    this.httpClient.get<Wod[]>(this.API_URL + '/wods').subscribe(data => {
+    this.httpClient.get<Wod[]>(this.API_URL + '/wods').pipe(
+      tap(wods => this.log('fetched wods')),
+      catchError(this.handleError('getWods', []))
+    ).subscribe(data => {
         this.dataChange.next(data);
       },
       (error: HttpErrorResponse) => {
       console.log (error.name + ' ' + error.message);
       });
-  }
-
-  /** GET wods from the server */
-  public getWods (): Observable<Wod[]> {
-    return this.httpClient.get<Wod[]>(this.API_URL + '/wods')
-      .pipe(
-        tap(wods => this.log('fetched wods')),
-        catchError(this.handleError('getWods', []))
-      );
   }
 
   /** GET wod by id. Will 404 if id not found */
@@ -73,26 +73,23 @@ export class DataService {
       catchError(this.handleError<Wod>(`getWod id=${id}`))
     );
   }
-  
-
-  // // DEMO ONLY, you can find working methods below
-  // addIssue (issue: Issue): void {
-  //   this.dialogData = issue;
-  // }
 
   /** POST: add a new wod to the server */
-  addWod (wod: Wod): Observable<Wod> {
-    return this.httpClient.post<Wod>(this.API_URL + '/wod/', wod, httpOptions)
+  addWod(wod: Wod): void {
+    this.httpClient.post(this.API_URL + '/wod ', wod, httpOptions)
     .pipe(
       // tslint:disable-next-line:no-shadowed-variable
       tap((wod: Wod) => this.log(`added wod w/ id=${wod.id}`)),
       catchError(this.handleError<Wod>('addWod'))
-    );
-  }
-
-  // updateIssue (issue: Issue): void {
-  //   this.dialogData = issue;
-  // }
+    )
+    .subscribe(data => {
+      this.dialogData = wod;
+      this.openSnackBar('Le WOD a bien été ajouté');
+      },
+      (err: HttpErrorResponse) => {
+        this.openSnackBar('Error occurred. Details: ' + err.name + ' ' + err.message);
+    });
+    }
 
   /** PUT: update the wod on the server */
   updateWod (wod: Wod): Observable<Wod> {
@@ -103,10 +100,6 @@ export class DataService {
     );
   }
 
-  // deleteIssue (id: number): void {
-  //   console.log(id);
-  // }
-
   /** DELETE: delete the wod from the server */
   deleteWod (wod: Wod | number): Observable<Wod> {
     const id = typeof wod === 'number' ? wod : wod.id;
@@ -115,6 +108,47 @@ export class DataService {
       tap(_ => this.log(`deleted wod id=${id}`)),
       catchError(this.handleError<Wod>('deleteWod'))
     );
+  }
+
+  /* GET anything whose name contains search term */
+
+  searchWods(term): Observable<Wod[]> {
+    if (!term.trim()) {
+      // if not search term, return empty wod array.
+      return of([]);
+    }
+    return this.httpClient.get<Wod[]>(this.API_URL + `/wod/search/${term}`).pipe(
+      tap(_ => this.log(`found this matching "${term}"`)),
+      catchError(this.handleError<Wod[]>('searchWods', []))
+    );
+  }
+
+  searchTodos(term): Observable<Todo[]> {
+    if (!term.trim()) {
+      // if not search term, return empty wod array.
+      return of([]);
+    }
+    return this.httpClient.get<Todo[]>(this.API_URL + `/todo/search/${term}`).pipe(
+      tap(_ => this.log(`found this matching "${term}"`)),
+      catchError(this.handleError<Todo[]>('searchWods', []))
+    );
+  }
+
+  searchMouvs(term): Observable<Mouvement[]> {
+    if (!term.trim()) {
+      // if not search term, return empty wod array.
+      return of([]);
+    }
+    return this.httpClient.get<Mouvement[]>(this.API_URL + `/mouv/search/${term}`).pipe(
+      tap(_ => this.log(`found this matching "${term}"`)),
+      catchError(this.handleError<Mouvement[]>('searchWods', []))
+    );
+  }
+
+  openSnackBar(message: string) {
+    this.snack.open(message, 'OK', {
+      duration: 2000
+    });
   }
 
     /**
@@ -137,10 +171,10 @@ export class DataService {
     };
   }
 
-    /** Log a HeroService message with the MessageService */
-    private log(message: string) {
-      this.messageService.add('HeroService: ' + message);
-    }
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add('HeroService: ' + message);
+  }
 }
 
 

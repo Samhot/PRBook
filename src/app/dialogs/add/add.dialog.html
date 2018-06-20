@@ -5,9 +5,9 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputtitle class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" maxlength="50" required >
+        <input matInput #inputname class="form-control" placeholder="name" [(ngModel)]="data.name" name="name" maxlength="50" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-        <mat-hint align="end">{{inputtitle.value?.length || 0}}/50</mat-hint>
+        <mat-hint align="end">{{inputname.value?.length || 0}}/50</mat-hint>
       </mat-form-field>
     </div>
 

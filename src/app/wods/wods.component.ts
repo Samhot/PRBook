@@ -1,22 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatPaginator, MatSort, MatDialog } from '@angular/material';
-import { Observable } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
-import { WodService } from '../services/wod.service';
-import { Wod } from '../_models/wod';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { DataSource } from '@angular/cdk/collections';
-import 'rxjs/add/observable/merge';
+import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatPaginator, MatSnackBar, MatSort } from '@angular/material';
+import { Observable } from 'rxjs';
 import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {AddDialogComponent} from '../dialogs/add/add.dialog.component';
-import {EditDialogComponent} from '../dialogs/edit/edit.dialog.component';
-import {DeleteDialogComponent} from '../dialogs/delete/delete.dialog.component';
+import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { AddDialogComponent } from '../dialogs/add/add.dialog.component';
+import { DeleteDialogComponent } from '../dialogs/delete/delete.dialog.component';
+import { EditDialogComponent } from '../dialogs/edit/edit.dialog.component';
 import { DataService } from '../services/data.service';
-import {MessageService} from '../services/message.service';
+import { MessageService } from '../services/message.service';
+import { WodService } from '../services/wod.service';
+import { Wod } from '../_models/wod';
 
 
 @Component({
@@ -28,7 +27,7 @@ export class WodsComponent implements OnInit {
 
   wods: Wod[];
 
-  displayedColumns = ['id', 'title', 'description', 'type', 'coachesNotes', 'movementsIds', 'actions'];
+  displayedColumns = ['name', 'description', 'type', 'coachesNotes', 'movementsIds', 'actions'];
   // displayedColumns = ['id', 'title', 'state', 'url', 'created_at', 'updated_at', 'actions'];
 
   // data = new MatTableDataSource();
@@ -41,7 +40,9 @@ export class WodsComponent implements OnInit {
               public dialog: MatDialog,
               public dataService: DataService,
               public wodService: WodService,
-              public messageService: MessageService) {}
+              public messageService: MessageService,
+              public snackBar: MatSnackBar
+            ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -49,22 +50,7 @@ export class WodsComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.getWods();
     this.loadData();
-
-    // this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    // this.data.sort = this.sort;
-
-    // merge(this.sort.sortChange, this.paginator.page)
-    //   .pipe(
-    //     startWith({}),
-    //     switchMap(() => {
-    //       return this.getJson();
-    //     }),
-    //     map(data => {
-    //       return data;
-    //     })
-    //   ).subscribe(data => this.data = data);
   }
 
   refresh() {
@@ -86,21 +72,21 @@ export class WodsComponent implements OnInit {
     });
   }
 
-  addNew2(title: string, description: string, type: number): void {
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {title: title, description: description, type: type }
-    });
+  // addNew2(title: string, description: string, type: number): void {
+  //   const dialogRef = this.dialog.open(AddDialogComponent, {
+  //     data: {title: title, description: description, type: type }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        this.wodService.addWod({ title, description, type } as Wod)
-          .subscribe(data => {
-            this.wods.push(data);
-          });
-          this.refreshTable();
-      }
-    })
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result === 1) {
+  //       this.wodService.addWod({ title, description, type } as Wod)
+  //         .subscribe(data => {
+  //           this.wods.push(data);
+  //         });
+  //         this.refreshTable();
+  //     }
+  //   });
+  // }
 
   delete(wod: Wod): void {
     this.wods = this.wods.filter(w => w !== wod);
@@ -163,7 +149,7 @@ export class WodsComponent implements OnInit {
   }
 
   public loadData() {
-    this.exampleDatabase = new DataService(this.httpClient, this.messageService);
+    this.exampleDatabase = new DataService(this.httpClient, this.messageService, this.snackBar);
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator, this.sort);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
@@ -175,28 +161,6 @@ export class WodsComponent implements OnInit {
         this.dataSource.filter = this.filter.nativeElement.value;
       });
   }
-
-  // ngAfterViewInit() {
-  //   this.data.paginator = this.paginator;
-  //   this.data.sort = this.sort;
-  // }
-
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-  //   this.data.filter = filterValue;
-  // }
-
-  // getWods(): void {
-  //   this.wodService.getWods()
-  //       .subscribe(wods => this.wods = wods);
-  // }
-
-  // getJson(): Observable<any> {
-  //   const href = 'http://localhost:5000/wods';
-  //   return this.http.get<any>(href);
-  // }
-
 }
 
 export class ExampleDataSource extends DataSource<Wod> {

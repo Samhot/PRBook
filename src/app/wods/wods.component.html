@@ -1,86 +1,18 @@
-<h2>List of WODs</h2>
-
-<div class="example-container" fxLayout="row" fxLayoutAlign="space-between center">
-  <label>Wod name:</label>
-    <mat-form-field>
-      <input matInput #name placeholder="Nom du WOD">
-    </mat-form-field>
-  <button mat-raised-button color="primary" (click)="add(name.value); name.value=''">
-    Ajouter
-  </button>
-</div>
-
-<div *ngIf="!list">
-  <ul class="wods">
-    <li *ngFor="let wod of wods">
-      <a routerLink="/wod/{{wod.id}}">
-        <span class="badge">{{wod.id}}</span> {{wod.name}}
-      </a>
-        <button class="delete" title="delete wod" (click)="delete(wod)">x</button>
-    </li>
-  </ul>
-</div>
-
-<!-- <div class="example-container mat-elevation-z8">
-  
-    <div class="example-table-container">
-        <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-          </mat-form-field>
-  
-      <mat-table [dataSource]="data" class="example-table"
-          matSort
-          matSortActive="title"
-          matSortDisableClear
-          matSortDirection="asc">
-
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> id. </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-        </ng-container>
-      
-        <ng-container matColumnDef="title">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> title </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-        </ng-container>
-      
-        <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> description </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
-        </ng-container>
-      
-        <ng-container matColumnDef="type">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> type </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="coachesNotes">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> coachesNotes </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.coachesNotes}} </mat-cell>
-        </ng-container>
-  
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-    </div>
-  
-    <mat-paginator [length]=data?.length [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div> -->
-
   <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
-    <span>Angular MatTable CRUD Example</span>
+    <span>Liste des WODS</span>
     <span class="spacer"></span>
-    Reload data:
-    <button mat-icon-button (click)="refresh()">
-      <mat-icon>refresh</mat-icon>
-    </button>
+    <span>Recharger:
+      <button mat-icon-button (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </span>
   </mat-toolbar>
   
   <div class="container mat-elevation-z8">
   
     <div class="form">
-      <mat-form-field floatPlaceholder="never" color="accent">
-        <input matInput #filter placeholder="Filter issues">
+      <mat-form-field floatPlaceholder="never" color="accent" style="min-width: 90%;padding: 0 5% 0 1%;">
+        <input matInput #filter placeholder="Filtrer les WODS">
       </mat-form-field>
     </div>
   
@@ -95,9 +27,9 @@
         <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="description">
@@ -130,11 +62,11 @@
   
         <mat-cell *matCellDef="let row; let i=index;">
           <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
-            <mat-icon aria-label="Edit">edit</mat-icon>
+            <mat-icon aria-label="Éditer">edit</mat-icon>
           </button>
   
           <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
-            <mat-icon aria-label="Delete">delete</mat-icon>
+            <mat-icon aria-label="Supprimer">delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
@@ -145,7 +77,7 @@
   
   
     <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
-      No results
+      <h1>Aucun résultat</h1>
     </div>
   
     <mat-paginator #paginator
@@ -155,6 +87,3 @@
                    [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
   </div>
-  
-
-  <app-wod-search></app-wod-search>
