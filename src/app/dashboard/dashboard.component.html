@@ -1,41 +1,43 @@
-<div fxLayout="column" fxLayoutAlign="start start">
-  <div fxLayout="column" fxLayoutAlign="start start" style="min-width: 100%;">
-    <h3>Top Wods</h3>
-    <div fxLayout="row" fxLayoutAlign="space-around center" style="min-width: 100%;">
-      <a *ngFor="let wod of wods"
-          routerLink="/wod/{{wod.id}}">
-        <div class="module">
-          <h4>{{wod.name}}</h4>
-        </div>
-      </a>
-    </div>
-  </div>
-
-<div fxLayout="column" fxLayoutAlign="start start" style="min-width: 100%;">
-  <h3>Top Mouvements</h3>
-  <div fxLayout="row" fxLayoutAlign="space-around center" style="min-width: 100%;">
-    <a *ngFor="let mouv of mouvs"
-        routerLink="/mouv/{{mouv.id}}">
-      <div class="modulemouv" [ngStyle]="{'background-image': 'url(' + mouv.imageUrl + ')'}">
-        <h4>{{mouv.name}}</h4>
+<mat-card style="margin-bottom: 10px">
+  <div fxLayout="column" fxLayoutAlign="start start">
+    <div fxLayout="column" fxLayoutAlign="start start" style="min-width: 100%;">
+      <h3>Top Wods</h3>
+      <div fxLayout="row" fxLayoutAlign="space-around center" style="min-width: 100%;">
+        <a *ngFor="let wod of wods"
+            routerLink="/wod/{{wod.id}}">
+          <div class="module">
+            <h4>{{wod.name}}</h4>
+          </div>
+        </a>
       </div>
-    </a>
-  </div>
-</div>
+    </div>
 
   <div fxLayout="column" fxLayoutAlign="start start" style="min-width: 100%;">
-    <h3>Top Todos</h3>
+    <h3>Top Mouvements</h3>
     <div fxLayout="row" fxLayoutAlign="space-around center" style="min-width: 100%;">
-      <a *ngFor="let todo of todos"
-          routerLink="/todo/{{todo.id}}">
-        <div class="module">
-          <h4>{{todo.name}}</h4>
+      <a *ngFor="let mouv of mouvs"
+          routerLink="/mouv/{{mouv.id}}">
+        <div class="modulemouv" [ngStyle]="{'background-image': 'url(' + mouv.imageUrl + ')'}">
+          <h4>{{mouv.name}}</h4>
         </div>
       </a>
     </div>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="start start">
-    <app-wod-search></app-wod-search>
+    <div fxLayout="column" fxLayoutAlign="start start" style="min-width: 100%;">
+      <h3>Top Todos</h3>
+      <div fxLayout="row" fxLayoutAlign="space-around center" style="min-width: 100%;">
+        <a *ngFor="let todo of todos"
+            routerLink="/todo/{{todo.id}}">
+          <div class="module">
+            <h4>{{todo.name}}</h4>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <app-wod-search></app-wod-search>
+    </div>
   </div>
-</div>
+</mat-card>

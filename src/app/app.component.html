@@ -1,4 +1,4 @@
-<mat-toolbar id="header-genihm" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar id="header-genihm" fxLayout="row" fxLayoutAlign="space-between center" >
   <span><h1>PRBook</h1></span>
   <span routerLink="/dashboard" style="cursor: pointer;">Dashboard</span>
   <span routerLink="/wods" style="cursor: pointer;">Wods</span>
@@ -12,32 +12,32 @@
 
   <div id="search-component">
     <input #searchBox id="search-box" (keyup)="searchTermGlobal(searchBox.value)" placeholder="Rechercher..." type="search" [(ngModel)]="test"
-            style="border-radius: 20px;border: none;height: 30px;margin-top: 20px;border-style: none;outline-width: 0;padding: 0 15px 0 15px;"/>
+            class="button-search"/>
   </div>
 
   <button mat-button (click)="logs = !logs">{{logs ? 'Cacher les logs' : 'Afficher les logs'}}</button>
 </mat-toolbar>
 
 <div class="search-result" *ngIf="test">
-  <mat-list>
-    <h3 mat-subheader>Wods</h3>
-    <mat-list-item *ngFor="let wod of wods$  | async">
+  <mat-list style="padding-top: 30px;">
+    <h3 mat-subheader class="result-title">Wods</h3>
+    <mat-list-item *ngFor="let wod of wods$  | async" class="tabulation">
       <mat-icon mat-list-icon>fitness_center</mat-icon>
-      <h4 mat-line>{{wod.name}}</h4>
+      <h4 mat-line><a href="/wod/{{wod.id}}" style="text-decoration: none;">{{wod.name}}</a></h4>
       <p mat-line>Type : {{wod.type}} </p>
     </mat-list-item>
-    <mat-divider></mat-divider>
-    <h3 mat-subheader>Mouvements</h3>
-    <mat-list-item *ngFor="let mouv of mouvs$  | async">
+    <!-- <mat-divider style="border-color: white"></mat-divider> -->
+    <h3 mat-subheader class="result-title">Mouvements</h3>
+    <mat-list-item *ngFor="let mouv of mouvs$  | async" class="tabulation">
       <mat-icon mat-list-icon>details</mat-icon>
-      <h4 mat-line>{{mouv.name}}</h4>
+      <h4 mat-line><a href="/mouv/{{mouv.id}}" style="text-decoration: none;">{{mouv.name}}</a></h4>
       <p mat-line>Type : {{mouv.type}} </p>
     </mat-list-item>
-    <mat-divider></mat-divider>
-    <h3 mat-subheader>Todos</h3>
-    <mat-list-item *ngFor="let todo of todos$  | async">
+    <!-- <mat-divider style="border-color: white"></mat-divider> -->
+    <h3 mat-subheader class="result-title">Todos</h3>
+    <mat-list-item *ngFor="let todo of todos$  | async" class="tabulation">
       <mat-icon mat-list-icon>list_alt</mat-icon>
-      <h4 mat-line>{{todo.name}}</h4>
+      <h4 mat-line><a href="/todo/{{todo.id}}" style="text-decoration: none;">{{todo.name}}</a></h4>
       <p mat-line> {{todo.content}} </p>
     </mat-list-item>
   </mat-list>
@@ -45,7 +45,7 @@
 
 <div style="position: absolute; top: 64px; left: 0px; right: 0px; margin: 10px 10px 0 10px;">
   <router-outlet></router-outlet>
-  <div *ngIf="logs" style="margin-bottom: 10px;">
+  <mat-card *ngIf="logs" style="margin-bottom: 10px;">
     <app-messages></app-messages>
-  </div>
+  </mat-card>
 </div>

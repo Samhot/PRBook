@@ -93,13 +93,9 @@ export class WodsComponent implements OnInit {
     this.wodService.deleteWod(wod).subscribe();
   }
 
-  startEdit(i: number, id: number, title: string, description: string, type: string, coachesNotes: string, movementsIds: string) {
-    this.id = id;
-    // index row is used just for debugging proposes and can be removed
-    this.index = i;
-    console.log(this.index);
+  startEdit(wod: Wod) {
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: {id: id, title: title, description: description, type: type, coachesNotes: coachesNotes, movementsIds: movementsIds}
+      data: {wod: wod}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -114,11 +110,9 @@ export class WodsComponent implements OnInit {
     });
   }
 
-  deleteItem(i: number, id: number, title: string, description: string, coachesNotes: string) {
-    this.index = i;
-    this.id = id;
+  deleteItem(wod: Wod) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {id: id, title: title, description: description, coachesNotes: coachesNotes}
+      data: {wod: wod}
     });
 
     dialogRef.afterClosed().subscribe(result => {
