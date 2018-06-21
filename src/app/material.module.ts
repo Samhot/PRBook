@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
-import { MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatChipsModule, MatDialogModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -20,7 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatTableModule,
         MatSortModule,
         MatSnackBarModule,
-        MatListModule
+        MatListModule,
+        MatChipsModule,
+        MatAutocompleteModule
     ],
 
     exports: [
@@ -49,7 +51,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatPaginatorModule,
         ReactiveFormsModule,
         MatSnackBarModule,
-        MatListModule
+        MatListModule,
+        MatChipsModule,
+        MatAutocompleteModule
     ],
 })
 

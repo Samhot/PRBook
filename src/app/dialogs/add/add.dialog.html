@@ -37,6 +37,34 @@
       </mat-form-field>
     </div>
 
+    <mat-form-field>
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let fruit of fruits"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Mouvements"
+            #fruitInput
+            [formControl]="fruitCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+            {{ fruit }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
     <div mat-dialog-actions>
       <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
