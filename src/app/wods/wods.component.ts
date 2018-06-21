@@ -93,9 +93,10 @@ export class WodsComponent implements OnInit {
     this.wodService.deleteWod(wod).subscribe();
   }
 
-  startEdit(wod: Wod) {
+  startEdit(id: number, name: string, description: string, type: number, coachesNotes: string, movementsIds: string) {
+    this.id = id;
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: {wod: wod}
+      data: {id: id, name: name, description: description, type: type, coachesNotes: coachesNotes, movementsIds: movementsIds}
     });
 
     dialogRef.afterClosed().subscribe(result => {

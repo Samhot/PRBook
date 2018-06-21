@@ -59,7 +59,7 @@
         </mat-header-cell>
   
         <mat-cell *matCellDef="let row; let i=index;">
-          <button mat-icon-button color="accent" (click)="startEdit(wod)">
+          <button mat-icon-button color="accent" (click)="startEdit(row.id, row.name, row.description, row.type, row.coachesNotes, row.movementsIds)">
             <mat-icon aria-label="Éditer">edit</mat-icon>
           </button>
   

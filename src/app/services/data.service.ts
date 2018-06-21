@@ -93,7 +93,7 @@ export class DataService {
 
   /** PUT: update the wod on the server */
   updateWod(wod: Wod): void {
-    this.httpClient.put(this.API_URL + '/wod' + wod.id, wod, httpOptions)
+    this.httpClient.put(this.API_URL + '/wod/' + wod.id, wod, httpOptions)
       .pipe(
         tap(_ => this.log(`deleted wod id=${wod.id}`)),
         catchError(this.handleError<Wod>('deleteWod'))
@@ -131,17 +131,7 @@ export class DataService {
     );
   }
 
-  // deleteWod (wod: Wod | number): Observable<Wod> {
-  //   const id = typeof wod === 'number' ? wod : wod.id;
-  //   // const url = `${this.wodsUrl}/${id}`;
-  //   return this.httpClient.delete<Wod>(this.API_URL + '/wod/' + id, httpOptions).pipe(
-  //     tap(_ => this.log(`deleted wod id=${id}`)),
-  //     catchError(this.handleError<Wod>('deleteWod'))
-  //   );
-  // }
-
-  /* GET anything whose name contains search term */
-
+  /* GET WODS whose name contains search term */
   searchWods(term): Observable<Wod[]> {
     if (!term.trim()) {
       // if not search term, return empty wod array.
@@ -153,6 +143,7 @@ export class DataService {
     );
   }
 
+  /* GET TODOS whose name contains search term */
   searchTodos(term): Observable<Todo[]> {
     if (!term.trim()) {
       // if not search term, return empty wod array.
@@ -164,6 +155,7 @@ export class DataService {
     );
   }
 
+  /* GET Mouvs whose name contains search term */
   searchMouvs(term): Observable<Mouvement[]> {
     if (!term.trim()) {
       // if not search term, return empty wod array.
