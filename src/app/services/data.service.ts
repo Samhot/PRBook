@@ -89,11 +89,11 @@ export class DataService {
       (err: HttpErrorResponse) => {
         this.openSnackBar('Error occurred. Details: ' + err.name + ' ' + err.message);
     });
-    }
+  }
 
   /** PUT: update the wod on the server */
   updateWod(wod: Wod): void {
-    this.httpClient.put(this.API_URL + wod.id, wod, httpOptions)
+    this.httpClient.put(this.API_URL + '/wod' + wod.id, wod, httpOptions)
       .pipe(
         tap(_ => this.log(`deleted wod id=${wod.id}`)),
         catchError(this.handleError<Wod>('deleteWod'))
@@ -116,14 +116,13 @@ export class DataService {
   // }
 
   /** DELETE: delete the wod from the server */
-  deleteWod(wod: Wod): void {
-    this.httpClient.delete(this.API_URL + '/wod/' + wod.id, httpOptions)
+  deleteWod(id: number): void {
+    this.httpClient.delete(this.API_URL + '/wod/' + id, httpOptions)
     .pipe(
-      tap(_ => this.log(`deleted wod id=${wod.id}`)),
+      tap(_ => this.log(`deleted wod id=${id}`)),
       catchError(this.handleError<Wod>('deleteWod'))
     )
     .subscribe(data => {
-      console.log(data['']);
         this.openSnackBar('Successfully deleted');
       },
       (err: HttpErrorResponse) => {

@@ -110,9 +110,10 @@ export class WodsComponent implements OnInit {
     });
   }
 
-  deleteItem(wod: Wod) {
+  deleteItem(id: number, name: string, description: string, type: number, coachesNotes: string, movementsIds: string) {
+    this.id = id;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {wod: wod}
+      data: {id: id, name: name, description: description, type: type, coachesNotes: coachesNotes, movementsIds: movementsIds}
     });
 
     dialogRef.afterClosed().subscribe(result => {
