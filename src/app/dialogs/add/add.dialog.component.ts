@@ -1,12 +1,10 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { DataService } from '../../services/data.service';
-import { MouvService } from '../../services/mouv.service';
-import { Mouvement } from '../../_models/mouvements';
 import { Wod } from '../../_models/wod';
 
 @Component({
@@ -15,22 +13,39 @@ import { Wod } from '../../_models/wod';
   styleUrls: ['../../dialogs/add/add.dialog.css']
 })
 
-export class AddDialogComponent implements OnInit {
+export class AddDialogComponent {
 
   visible = true;
   selectable = true;
   removable = true;
-  addOnBlur = false;
+  addOnBlur = true;
+  selected = true;
 
   separatorKeysCodes = [ENTER, COMMA];
 
-  mouvCtrl = new FormControl();
+  movementsIds = new FormControl();
 
-  filteredMouvs$: Observable<Mouvement[]>;
+  filteredMouvs: Observable<any[]>;
 
-  mouvs = [];
+  mouvs = [
+    'Deadlift',
+  ];
 
-  allMouvs = [];
+  allMouvs = [
+    'Back Squat', 'Front Squat', 'OVHS', 'Deadlift', 'Thrusters', 'Clean', 'Clean & Jerk', 'Push Press', 'Bench Press',
+    'Pull-Up', 'HSPU', 'Box Jump', 'Handstand Walk', 'Push-up', 'Bar Muscle-Up', 'Ring Muscle-Up', 'Bear Walk', 'Burpee',
+    'Row', 'Ski erg', 'Assault Bike',
+    'Run', 'Swim'
+  ];
+
+  wodTypes = [
+    {value: '0', viewValue: 'Time'},
+    {value: '1', viewValue: 'Rounds + Reps'},
+    {value: '2', viewValue: 'Reps'},
+    {value: '3', viewValue: 'Charge'},
+    {value: '4', viewValue: 'Autre/Texte'},
+    {value: '5', viewValue: 'Pas de score'}
+  ];
 
   formControl = new FormControl('', [
     Validators.required
@@ -41,23 +56,11 @@ export class AddDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Wod,
-              public dataService: DataService,
-              private mouvService: MouvService) {
-
-              }
-
-  ngOnInit() {
-    this.getMouvs();
-    this.filteredMouvs$ = this.mouvCtrl.valueChanges.pipe(
-      startWith(null),
-      map((mouv: string | null) => mouv ? this.filter(mouv) : this.allMouvs.slice()));
-  }
-
-
-  getMouvs(): void {
-    this.mouvService.getMouvs()
-        .subscribe(mouvs => this.allMouvs = mouvs);
-  }
+              public dataService: DataService) {
+                this.filteredMouvs = this.movementsIds.valueChanges.pipe(
+                  startWith(null),
+                  map((mouv: string | null) => mouv ? this.filter(mouv) : this.allMouvs.slice()));
+            }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -73,7 +76,7 @@ export class AddDialogComponent implements OnInit {
       input.value = '';
     }
 
-    this.mouvCtrl.setValue(null);
+    this.movementsIds.setValue(null);
   }
 
   remove(mouv: any): void {
@@ -86,13 +89,13 @@ export class AddDialogComponent implements OnInit {
 
   filter(name: string) {
     return this.allMouvs.filter(mouv =>
-        mouv.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+        mouv.toLowerCase().indexOf(name.toLowerCase()) === 0);
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
+  selectedChip(event: MatAutocompleteSelectedEvent): void {
     this.mouvs.push(event.option.viewValue);
     this.mouvInput.nativeElement.value = '';
-    this.mouvCtrl.setValue(null);
+    this.movementsIds.setValue(null);
   }
 
   getErrorMessage() {
@@ -109,7 +112,8 @@ export class AddDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public confirmAdd(): void {
+  public confirmAdd(mouvs: Array<any>): void {
+    this.data.movementsIds = JSON.stringify(mouvs);
     this.dataService.addWod(this.data);
   }
 }

@@ -1,11 +1,11 @@
 <div class="container">
-  <h3 mat-dialog-title>Add new Wod</h3>
+  <h3 mat-dialog-title>Créer un WOD</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #inputname class="form-control" placeholder="name" [(ngModel)]="data.name" name="name" maxlength="50" required >
+        <input matInput #inputname class="form-control" placeholder="Nom du WOD" [(ngModel)]="data.name" name="name" maxlength="50" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
         <mat-hint align="end">{{inputname.value?.length || 0}}/50</mat-hint>
       </mat-form-field>
@@ -20,54 +20,52 @@
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="Type" [(ngModel)]="data.type" name="type" required>
+        <mat-select placeholder="Type de WOD" [(ngModel)]="data.type" name="type" required>
+          <mat-option *ngFor="let type of wodTypes" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput placeholder="coachesNotes" [(ngModel)]="data.coachesNotes" name="coachesNotes">
+        <textarea matInput placeholder="Notes du coach" [(ngModel)]="data.coachesNotes" name="coachesNotes"></textarea>
       </mat-form-field>
     </div>
 
     <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="movementsIds" [(ngModel)]="data.movementsIds" name="movementsIds">
+      <mat-form-field class="chip-list" aria-orientation="horizontal">
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let mouv of mouvs"
+            [removable]="removable"
+            (removed)="remove(mouv)">
+            {{mouv}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Ajouter un mouvement..."
+            #mouvInput
+            [formControl]="movementsIds"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"/>
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedChip($event)">
+          <mat-option *ngFor="let mouv of filteredMouvs | async" [value]="mouv">
+            {{ mouv }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
-
-    <mat-form-field class="demo-chip-list">
-      <mat-chip-list #chipList>
-        <mat-chip
-          *ngFor="let mouv of mouvs"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="remove(mouv)">
-          {{mouv}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input
-          placeholder="Ajouter un mouvement..."
-          #mouvInput
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="add($event)"
-        />
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let mouv of allMouvs" [value]="mouv">
-          {{ mouv.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
     
-
     <div mat-dialog-actions>
-      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
-      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd(mouvs)">Ajouter</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Annuler</button>
     </div>
   </form>
 </div>

@@ -11,7 +11,12 @@
     <p></p>
     Coaches Notes: {{data.coachesNotes}}
     <p></p>
-    Movements IDs: {{data.movementsIds}}
+      <mat-chip-list #chipList>
+        Movements IDs: 
+        <mat-chip>
+          {{data.movementsIds}}
+        </mat-chip>
+      </mat-chip-list>
     <p></p>
   </div>
 

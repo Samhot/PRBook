@@ -1,6 +1,6 @@
 export class Wod {
     id: number;
-    title: string;
+    name: string;
     description: string;
     type: number;
     coachesNotes: string;

@@ -20,19 +20,19 @@
             The actual rendered columns are set as a property on the row definition" -->
   
       <!-- ID Column -->
-      <ng-container matColumnDef="id">
+      <!-- <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
         <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
-      </ng-container>
+      </ng-container> -->
   
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="max-width: 160px;">Name</mat-header-cell>
+        <mat-cell *matCellDef="let row" style="max-width: 160px;"><a style="text-decoration: none;color: black;" href="/wod/{{row.id}}">{{row.name}}</a></mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.description}}</mat-cell>
+        <mat-cell *matCellDef="let row" style="padding-right: 24px;"><a style="text-decoration: none;color: black;" href="/wod/{{row.id}}">{{row.description}}</a></mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="type">
@@ -49,16 +49,26 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Mouvements</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.movementsIds}}</mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="max-width: 85px;">Créé le</mat-header-cell>
+        <mat-cell *matCellDef="let row" style="max-width: 85px;"> {{row.created_at | date:"dd/MM/yy"}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="modified_at">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="max-width: 85px;padding-right: 19px;">Modifié le</mat-header-cell>
+        <mat-cell *matCellDef="let row" style="max-width: 85px;"> {{row.modified_at | date:"dd/MM/yy"}}</mat-cell>
+      </ng-container>
   
       <!-- actions -->
       <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef>
+        <mat-header-cell *matHeaderCellDef style="max-width: 50px;">
           <button mat-icon-button color="primary" (click)="addNew()">
             <mat-icon aria-label="Ajouter un WOD">add</mat-icon>
           </button>
         </mat-header-cell>
   
-        <mat-cell *matCellDef="let row; let i=index;">
+        <mat-cell *matCellDef="let row; let i=index;" style="max-width: 50px;padding-right: 40px;">
           <button mat-icon-button color="accent" (click)="startEdit(row.id, row.name, row.description, row.type, row.coachesNotes, row.movementsIds)">
             <mat-icon aria-label="Éditer">edit</mat-icon>
           </button>

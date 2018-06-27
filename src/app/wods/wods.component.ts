@@ -27,8 +27,14 @@ export class WodsComponent implements OnInit {
 
   wods: Wod[];
 
-  displayedColumns = ['name', 'description', 'type', 'coachesNotes', 'movementsIds', 'actions'];
-  // displayedColumns = ['id', 'title', 'state', 'url', 'created_at', 'updated_at', 'actions'];
+  displayedColumns = ['name',
+  'description',
+  // 'type',
+  // 'coachesNotes',
+  // 'movementsIds',
+  'created_at',
+  // 'modified_at',
+  'actions'];
 
   // data = new MatTableDataSource();
   exampleDatabase: DataService | null;
@@ -71,22 +77,6 @@ export class WodsComponent implements OnInit {
       }
     });
   }
-
-  // addNew2(title: string, description: string, type: number): void {
-  //   const dialogRef = this.dialog.open(AddDialogComponent, {
-  //     data: {title: title, description: description, type: type }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       this.wodService.addWod({ title, description, type } as Wod)
-  //         .subscribe(data => {
-  //           this.wods.push(data);
-  //         });
-  //         this.refreshTable();
-  //     }
-  //   });
-  // }
 
   delete(wod: Wod): void {
     this.wods = this.wods.filter(w => w !== wod);
@@ -196,7 +186,7 @@ export class ExampleDataSource extends DataSource<Wod> {
     return Observable.merge(...displayDataChanges).map(() => {
       // Filter data
       this.filteredData = this._exampleDatabase.data.filter((wod: Wod) => {
-        const searchStr = (wod.id + wod.title + wod.description + wod.type + wod.coachesNotes + wod.movementsIds).toLowerCase();
+        const searchStr = (wod.id + wod.name + wod.description + wod.type + wod.coachesNotes + wod.movementsIds).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
       });
 
@@ -226,7 +216,7 @@ export class ExampleDataSource extends DataSource<Wod> {
 
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'title': [propertyA, propertyB] = [a.title, b.title]; break;
+        case 'name': [propertyA, propertyB] = [a.name, b.name]; break;
         case 'description': [propertyA, propertyB] = [a.description, b.description]; break;
         case 'type': [propertyA, propertyB] = [a.type, b.type]; break;
         case 'coachesNotes': [propertyA, propertyB] = [a.coachesNotes, b.coachesNotes]; break;
